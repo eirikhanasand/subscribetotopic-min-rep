@@ -1,41 +1,45 @@
-import { PersistGate } from "redux-persist/integration/react"
-import { persistStore } from "redux-persist"
-import { AppRegistry } from "react-native"
-import { Provider } from "react-redux"
-import Navigator from "@nav/tabs"
-import store from "@redux/store"
-import ForceUpdate from "@components/menu/forceUpdate"
-import { requestNotificationPermission } from "@utils/notificationSetup"
+import React from 'react';
+import { AppRegistry, Button, Text, View } from 'react-native';
+import firebase from '@react-native-firebase/app';
+import messaging from '@react-native-firebase/messaging';
 
-let persistor = persistStore(store)
-
-/**
- * **Function for running the entire Login app**
- *
- * Handles notifications while app is in background state
- *
- * Provider allows the store to be used by any screen with navigation.
- *
- * Persistgate is used for syncing Redux states with AsyncStorage
- *
- * Navigator contains all screens and functionality to navigate between them
- *
- * @returns Entire application
- */
-export default function App() {
-
-    // Registers the root component
-    AppRegistry.registerComponent("app", () => App)
-
-    // Asks for permission to send notifications
-    requestNotificationPermission()
-
+firebase.messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
+firebase.messaging().onMessage(message => {
+  console.log('on message log');
+});
+n
+export default function App(props: any) {
     return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                {/* <ForceUpdate /> */}
-                <Navigator />
-            </PersistGate>
-        </Provider>
+        <View>
+        <Text>text text text</Text>
+        <Text>text text text</Text>
+        <Text>text text text</Text>
+        <Button
+            title="subscribe to topic"
+            onPress={async () => {
+            try {
+                await firebase.messaging().subscribeToTopic('test');
+                console.log('subscribed');
+            } catch (e) {
+                console.log(e);
+            }
+            }}
+        />
+        <Button
+            title="get token"
+            onPress={async () => {
+            try {
+                const token = await messaging().getToken();
+                console.log('token', token);
+            } catch (e) {
+                console.log(e);
+            }
+            }}
+        />
+        </View>
     )
 }
+
+AppRegistry.registerComponent('testing', () => App);

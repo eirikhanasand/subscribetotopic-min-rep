@@ -1,2 +1,2 @@
-# Login
-Check the README folder.
+# subscribeToTopic minimal reproducible 
+Minimal application required to reproduce firebase subscribeToTopic indefinite hanging issue. Please follow https://github.com/invertase/react-native-firebase/issues/7997 for updates regarding this issue.

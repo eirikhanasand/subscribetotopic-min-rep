@@ -1,7 +1,7 @@
 # Secrets
-# config.json
 google-services.json
 GoogleService-Info.plist
+.env
 
 # vscode
 .vscode
