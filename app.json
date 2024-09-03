@@ -7,6 +7,11 @@
         "version": "1.0.0",
         "orientation": "portrait",
         "userInterfaceStyle": "dark",
+        "splash": {
+            "image": "./public/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#000000"
+        },
         "updates": {
             "fallbackToCacheTimeout": 0,
             "url": "https://u.expo.dev/952a1914-0c53-43e7-b64e-8daab0b3a435"
