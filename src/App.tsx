@@ -13,7 +13,7 @@ firebase.messaging().onMessage(message => {
 
 export default function App(props: any) {
     return (
-        <View>
+        <View style={{height: '100%', justifyContent: 'center'}}>
             <Button
                 title="subscribe to topic"
                 onPress={async () => {
@@ -29,6 +29,10 @@ export default function App(props: any) {
                 title="get token"
                 onPress={async () => {
                     try {
+                        if (!firebase.messaging().isDeviceRegisteredForRemoteMessages) {
+                            await firebase.messaging().registerDeviceForRemoteMessages();
+                        }
+
                         const token = await messaging().getToken();
                         console.log('token', token);
                     } catch (e) {
